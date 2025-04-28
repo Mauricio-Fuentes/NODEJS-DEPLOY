@@ -771,6 +771,5 @@ In this tutorial, we created a Node.js and dockerized it according to best pract
 
 > Note: `GitHub Packages` can be substituted by another container registry according to the action documentation, and instead of `DigitalOcean` can be used another `VPS`. You're free to customize this configuration according to your needs.
 
-Find boilerplate on [GitHub](https://github.com/tfarras/nodejs-deploy)
 
-Find me on [GitHub](https://github.com/tfarras) and [LinkedIn](https://www.linkedin.com/in/taimoor-farras/)
+Find me on [GitHub](https://github.com/Mauricio-Fuentes)
