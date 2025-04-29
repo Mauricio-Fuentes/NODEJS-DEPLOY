@@ -11,8 +11,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  REPO: mauricio-fuentes/nodejs-deploy
-  CONTAINER: nodejs-image
+  REPO: mafumo/nur
+  CONTAINER: node-service
 
 jobs:
   push_to_registry:
@@ -29,8 +29,8 @@ jobs:
           password: ${{ secrets.TOKEN_GITHUB }}
           registry: ${{ env.REGISTRY }}
           repository: ${{ env.REPO }}
-          #tag: ${{ env.IMAGE_TAG }}
-          tag_with_ref: true
+          tag: ${{ env.IMAGE_TAG }}
+          #tag_with_ref: true
   deploy:
     needs: [push_to_registry]
     name: Deploy to DigitalOcean
@@ -49,7 +49,7 @@ jobs:
 
       - name: Pull latest container
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker pull ${{env.REGISTRY}}/${{env.REPO}}:latest"
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker pull ${{env.REGISTRY}}/${{env.REPO}}:1.0.0"
 
       - name: Stop deployed container
         continue-on-error: true
@@ -63,7 +63,7 @@ jobs:
 
       - name: Start docker container
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker run -p 8080:8080 -d --name=${{env.CONTAINER}} ${{env.REGISTRY}}/${{env.REPO}}:latest"
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker run -p 8080:8080 -d --name=${{env.CONTAINER}} ${{env.REGISTRY}}/${{env.REPO}}:1.0.0"
 
       - name: Logout from the GitHub Packages Docker Registry
         run: ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker logout ${{env.REGISTRY}}"
