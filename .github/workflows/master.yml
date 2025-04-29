@@ -13,6 +13,8 @@ env:
   REGISTRY: docker.io
   REPO: mafumo/nur
   CONTAINER: node-service
+  USR: mafumo
+  PWD: m@fumo1412
 
 jobs:
   push_to_registry:
