@@ -11,7 +11,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  REPO: Mauricio-Fuentes/NODEJS-DEPLOY
+  REPO: mauricio-fuentes/nodejs-deploy
   CONTAINER: nodejs-image
 
 jobs:
