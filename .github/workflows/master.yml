@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  REGISTRY: ghcr.io
+  REGISTRY: docker.io
   REPO: mafumo/nur
   CONTAINER: node-service
 
