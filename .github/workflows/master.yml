@@ -51,48 +51,6 @@ jobs:
       - name: Login to the GitHub Packages Docker Registry
         run: ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker login ${{env.REGISTRY}} -u ${{env.USR}} -p ${{env.PWD}}"
         #run: ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker login ${{env.REGISTRY}} -u ${{github.actor}} -p ${{secrets.GITHUB_TOKEN}}"
-      
-      - name: Set up SSH and update Ubuntu + Install Docker
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          host: ${{secrets.SSH_HOST}}  # Tu servidor remoto (IP o dominio)
-          username: ${{secrets.SSH_USER}}  # Nombre de usuario SSH
-          key: ${{secrets.SSH_KEY}}  # Tu clave privada SSH
-          script: |
-            # Actualizar Ubuntu
-            sudo apt-get update -y && sudo apt-get upgrade -y
-
-            sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-
-            echo "Agregando la clave GPG de Docker..."
-
-            # Agregar la clave GPG de Docker
-            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-
-            echo "Agregando el repositorio de Docker..."
-
-            # Agregar el repositorio de Docker
-            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-
-            # Actualizar el índice de paquetes e instalar Docker
-            sudo apt-get update -y
-            sudo apt-get install -y docker-ce
-
-            echo "Habilitando e iniciando Docker..."
-
-            # Habilitar e iniciar Docker
-            sudo systemctl enable --now docker
-
-            # Verificar si Docker está corriendo
-            sudo systemctl status docker
-
-            # Verificar que Docker se haya instalado correctamente
-            sudo docker --version
-
-            # Asegurarse de que Docker está en el PATH
-            echo $PATH
-            which docker
-            docker --version
 
       - name: Pull latest container
         run: |
