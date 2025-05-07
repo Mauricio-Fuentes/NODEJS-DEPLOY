@@ -62,13 +62,36 @@ jobs:
             # Actualizar Ubuntu
             sudo apt-get update -y && sudo apt-get upgrade -y
 
-            # Instalar Docker
-            sudo apt-get install -y docker.io
+            sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+
+            echo "Agregando la clave GPG de Docker..."
+
+            # Agregar la clave GPG de Docker
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+            echo "Agregando el repositorio de Docker..."
+
+            # Agregar el repositorio de Docker
+            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+            # Actualizar el índice de paquetes e instalar Docker
+            sudo apt-get update -y
+            sudo apt-get install -y docker-ce
+
+            echo "Habilitando e iniciando Docker..."
 
             # Habilitar e iniciar Docker
             sudo systemctl enable --now docker
 
-            # Verificar si Docker se instaló correctamente
+            # Verificar si Docker está corriendo
+            sudo systemctl status docker
+
+            # Verificar que Docker se haya instalado correctamente
+            sudo docker --version
+
+            # Asegurarse de que Docker está en el PATH
+            echo $PATH
+            which docker
             docker --version
 
       - name: Pull latest container
