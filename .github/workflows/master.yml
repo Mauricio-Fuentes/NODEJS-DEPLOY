@@ -55,7 +55,7 @@ jobs:
       - name: Update Ubuntu - Docker
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            sudo apt-get update -y && sudo apt-get upgrade -y
+            sudo apt-get update
             sudo apt-get install -y docker.io
             sudo systemctl enable --now docker
           EOF
