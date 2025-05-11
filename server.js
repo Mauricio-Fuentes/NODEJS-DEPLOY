@@ -1,10 +1,9 @@
 'use strict';
 
 const express = require('express');
-const { v4: uuidv4 } = require('uuid');
 
 const PORT = 8080;
-const HOST = '127.0.0.1';
+const HOST = '0.0.0.0';
 
 const app = express();
 app.get('/', (_, res) => {
@@ -27,18 +26,6 @@ const server = app.listen(PORT, HOST, () => {
   console.log(`Running on http://${HOST}:${PORT}`);
 });
 
-app.get('/cliente', (req, res) => {
-  const cliente = {
-    id: uuidv4(),
-    nombre: "Juan Pérez",
-    email: "juan.perez@example.com",
-    telefono: "+54 11 1234-5678"
-  };
-
-  res.send({
-    cliente: cliente
-  });
-});
 
 // Graceful shutdown
 function closeGracefully(signal) {

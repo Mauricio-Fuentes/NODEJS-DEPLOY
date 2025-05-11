@@ -1,12 +1,9 @@
 name: Build, Push and Deploy Node.js app
 
-# Controls when the action will run.
 on:
-  # Triggers the workflow on push events but only for the master branch
   push:
     branches: [master]
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 env:
@@ -70,17 +67,3 @@ jobs:
 
       - name: Logout from the GitHub Packages Docker Registry
         run: ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker logout ${{env.REGISTRY}}"
-
-      - name: SSH into server and pull PostgreSQL Docker image
-        run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} << 'EOF'
-            docker pull postgres
-            docker rm -f my_postgres || true
-            docker run -d \
-              --name my_postgres \
-              -e POSTGRES_USER=postgres \
-              -e POSTGRES_PASSWORD=postgres \
-              -e POSTGRES_DB=postgres \
-              -p 5432:5432 \
-              postgres
-          EOF
