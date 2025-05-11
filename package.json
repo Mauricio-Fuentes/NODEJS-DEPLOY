@@ -2,12 +2,13 @@
   "name": "nodejs-deploy",
   "version": "1.0.0",
   "description": "Node.js on DO using Docker and Github Actions",
-  "author": "First Last <first.last@example.com>",
+  "author": "Mauricio Fuentes <m_fuentes_m@hotmail.com>",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "uuid": "^11.1.0"
   }
 }

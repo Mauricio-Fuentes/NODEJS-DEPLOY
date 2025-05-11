@@ -62,11 +62,11 @@ jobs:
 
       - name: Pull latest container
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker pull ${{env.REGISTRY}}/${{env.REPO}}:1.0.0"
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker pull ${{env.REGISTRY}}/${{env.REPO}}:1.0.1"
 
       - name: Start docker container
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker run -p 8080:8080 -d --name=${{env.CONTAINER}} ${{env.REGISTRY}}/${{env.REPO}}:1.0.0"
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker run -p 8080:8080 -d --name=${{env.CONTAINER}} ${{env.REGISTRY}}/${{env.REPO}}:1.0.1"
 
       - name: Logout from the GitHub Packages Docker Registry
         run: ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker logout ${{env.REGISTRY}}"
